@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using SimpleFormBuilder.Entity;
 
 namespace SimpleFormBuilder.Controllers
 {
@@ -6,21 +7,7 @@ namespace SimpleFormBuilder.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return Redirect(Url.Action("Index", "Design", new { entity = nameof(Person) }));
         }
     }
 }

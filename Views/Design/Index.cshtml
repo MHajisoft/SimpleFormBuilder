@@ -1,0 +1,14 @@
+﻿@using SimpleFormBuilder.Models
+
+@model DesignListModel
+
+
+@if (Model.Properties.Any())
+{
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        No config for << @Model.EntityName >> exist!
+    </div>
+}

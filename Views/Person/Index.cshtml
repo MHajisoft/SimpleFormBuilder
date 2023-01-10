@@ -1,0 +1,14 @@
+﻿@using SimpleFormBuilder.Models
+
+@model PersonListModel
+
+@if (Model.Persons.Any())
+{
+    
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        No person exist!
+    </div>
+}
