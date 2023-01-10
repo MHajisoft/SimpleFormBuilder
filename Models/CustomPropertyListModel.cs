@@ -3,7 +3,7 @@ using SimpleFormBuilder.Entity;
 
 namespace SimpleFormBuilder.Models
 {
-    public class DesignListModel
+    public class CustomPropertyListModel
     {
         public string EntityName { get; set; }
         

@@ -1,11 +1,11 @@
 ﻿@using SimpleFormBuilder.Entity
 @using SimpleFormBuilder.Models
 
-@model DesignListModel
+@model CustomPropertyListModel
 
 <h5>Entiyt : @Model.EntityName</h5>
 
-<a class="btn btn-primary col-1 my-2" href="@Url.Action("Add", "Design", new { entity = Model.EntityName })">Add</a>
+<a class="btn btn-primary col-1 my-2" href="@Url.Action("Add", "CustomProperty", new { entity = Model.EntityName })">Add</a>
 
 @if (Model.Properties.Any())
 {
@@ -31,8 +31,8 @@
                 <td>@item.OrderIndex</td>
                 <td>@item.IsActive</td>
                 <td>
-                    <a class="btn btn-success" href="@Url.Action("Detail", "Design", new{id=@item.Id})">Edit</a>
-                    <a class="btn btn-danger" href="@Url.Action("Delete", "Design", new{id=@item.Id})">Delete</a>
+                    <a class="btn btn-success" href="@Url.Action("Detail", "CustomProperty", new{id=@item.Id})">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "CustomProperty", new{id=@item.Id})">Delete</a>
                 </td>
                 @{ count++; }
             </tr>

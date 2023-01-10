@@ -5,7 +5,7 @@ using SelectListItem = System.Web.Mvc.SelectListItem;
 
 namespace SimpleFormBuilder.Models
 {
-    public class DesignDetailModel
+    public class CustomPropertyDetailModel
     {
         public CustomProperty CustomProperty { get; set; }
         

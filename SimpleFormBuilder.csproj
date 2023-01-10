@@ -126,7 +126,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\ShowInDesignerAttribute.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\DesignController.cs" />
+    <Compile Include="Controllers\CustomPropertyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Database\AppDbContext.cs" />
@@ -140,8 +140,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\DesignDetailModel.cs" />
-    <Compile Include="Models\DesignListModel.cs" />
+    <Compile Include="Models\CustomPropertyDetailModel.cs" />
+    <Compile Include="Models\CustomPropertyListModel.cs" />
     <Compile Include="Models\PersonDetailModel.cs" />
     <Compile Include="Models\PersonListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -209,8 +209,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Design\Detail.cshtml" />
-    <Content Include="Views\Design\Index.cshtml" />
+    <Content Include="Views\CustomProperty\Detail.cshtml" />
+    <Content Include="Views\CustomProperty\Index.cshtml" />
     <Content Include="Views\Person\Detail.cshtml" />
     <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Web.config" />

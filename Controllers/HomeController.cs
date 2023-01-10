@@ -7,7 +7,7 @@ namespace SimpleFormBuilder.Controllers
     {
         public ActionResult Index()
         {
-            return Redirect(Url.Action("Index", "Design", new { entity = nameof(Person) }));
+            return Redirect(Url.Action("Index", "CustomProperty", new { entity = nameof(Person) }));
         }
     }
 }

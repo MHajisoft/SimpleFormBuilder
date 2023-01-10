@@ -1,9 +1,9 @@
 ﻿@using SimpleFormBuilder.Entity
 @using SimpleFormBuilder.Models
 
-@model DesignDetailModel
+@model CustomPropertyDetailModel
 
-@using (Html.BeginForm("Update", "Design", FormMethod.Post, new { @class = "needs-validation", novalidate = "" }))
+@using (Html.BeginForm("Update", "CustomProperty", FormMethod.Post, new { @class = "needs-validation", novalidate = "" }))
 {
     @Html.HiddenFor(c => c.CustomProperty.Id)
     @Html.HiddenFor(c => c.CustomProperty.EntityName)
@@ -46,7 +46,7 @@
     </div>
 
     <div class="row mb-5">
-        <a class="btn btn-danger col-1" href="@Url.Action("Index", "Design", new { entity = nameof(Person) })">Back</a>
+        <a class="btn btn-danger col-1" href="@Url.Action("Index", "CustomProperty", new { entity = nameof(Person) })">Back</a>
         <button class="btn btn-success col-1" type="submit">Save</button>
     </div>
 }

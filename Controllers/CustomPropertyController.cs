@@ -9,11 +9,11 @@ using SimpleFormBuilder.Models;
 
 namespace SimpleFormBuilder.Controllers
 {
-    public class DesignController : BaseController
+    public class CustomPropertyController : BaseController
     {
         public ActionResult Index(string entity)
         {
-            var model = new DesignListModel
+            var model = new CustomPropertyListModel
             {
                 EntityName = entity,
                 Properties = Context.CustomProperties.AsNoTracking().Where(x => x.EntityName.Equals(entity)).ToList()
@@ -24,16 +24,16 @@ namespace SimpleFormBuilder.Controllers
 
         public ActionResult Add(string entity)
         {
-            return View("Detail", GetDesignDetailModel(new CustomProperty { EntityName = entity }));
+            return View("Detail", GetCustomPropertyDetailModel(new CustomProperty { EntityName = entity }));
         }
 
         public ActionResult Detail(int id)
         {
-            return View(GetDesignDetailModel(Context.CustomProperties.Single(x => x.Id == id)));
+            return View(GetCustomPropertyDetailModel(Context.CustomProperties.Single(x => x.Id == id)));
         }
 
         [HttpPost]
-        public ActionResult Update(DesignDetailModel model)
+        public ActionResult Update(CustomPropertyDetailModel model)
         {
             if (model.CustomProperty.Id > 0)
             {
@@ -53,7 +53,7 @@ namespace SimpleFormBuilder.Controllers
 
             Context.SaveChanges();
 
-            return Redirect(Url.Action("Index", "Design", new { entity = nameof(Person) }));
+            return Redirect(Url.Action("Index", "CustomProperty", new { entity = nameof(Person) }));
         }
 
         public ActionResult Delete(int id)
@@ -62,12 +62,12 @@ namespace SimpleFormBuilder.Controllers
             Context.Entry(entity).State = EntityState.Deleted;
             Context.SaveChanges();
 
-            return Redirect(Url.Action("Index", "Design", new { entity = nameof(Person) }));
+            return Redirect(Url.Action("Index", "CustomProperty", new { entity = nameof(Person) }));
         }
 
-        private DesignDetailModel GetDesignDetailModel(CustomProperty customProperty)
+        private CustomPropertyDetailModel GetCustomPropertyDetailModel(CustomProperty customProperty)
         {
-            var model = new DesignDetailModel
+            var model = new CustomPropertyDetailModel
             {
                 CustomProperty = customProperty
             };
