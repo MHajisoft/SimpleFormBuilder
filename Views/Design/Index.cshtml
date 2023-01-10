@@ -1,10 +1,44 @@
-﻿@using SimpleFormBuilder.Models
+﻿@using SimpleFormBuilder.Entity
+@using SimpleFormBuilder.Models
 
 @model DesignListModel
 
+<h5>Entiyt : @Model.EntityName</h5>
+
+<a class="btn btn-primary col-1 my-2" href="@Url.Action("Add", "Design", new { entity = Model.EntityName })">Add</a>
 
 @if (Model.Properties.Any())
 {
+    var count = 1;
+    <table class="table table-info table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col" class="col-1">#</th>
+            <th scope="col" class="col-3">@nameof(CustomProperty.PropertyName)</th>
+            <th scope="col" class="col-4">@nameof(CustomProperty.Title)</th>
+            <th scope="col" class="col-1">@nameof(CustomProperty.OrderIndex)</th>
+            <th scope="col" class="col-1">@nameof(CustomProperty.IsActive)</th>
+            <th scope="col" class="col-2">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Properties.OrderBy(x => x.OrderIndex).ThenBy(x => x.Id))
+        {
+            <tr>
+                <th scope="row">@count</th>
+                <td>@item.PropertyName</td>
+                <td>@item.Title</td>
+                <td>@item.OrderIndex</td>
+                <td>@item.IsActive</td>
+                <td>
+                    <a class="btn btn-success" href="@Url.Action("Detail", "Design", new{id=@item.Id})">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Design", new{id=@item.Id})">Delete</a>
+                </td>
+                @{ count++; }
+            </tr>
+        }
+        </tbody>
+    </table>
 }
 else
 {

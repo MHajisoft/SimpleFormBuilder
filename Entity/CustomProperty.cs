@@ -1,12 +1,14 @@
-﻿namespace SimpleFormBuilder.Entity
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SimpleFormBuilder.Entity
 {
     public class CustomProperty : BaseEntity
     {
-        public string EntityName { get; set; }
+        [Required] public string EntityName { get; set; }
 
-        public string PropertyName { get; set; }
+        [Required] public string PropertyName { get; set; }
 
-        public string Title { get; set; }
+        [Required] public string Title { get; set; }
 
         public string Category { get; set; }
 
@@ -28,6 +30,6 @@
 
         public bool IsActive { get; set; } = true;
 
-        public int OrderIndex { get; set; } = 1;
+        [Range(1, 100)] [Required] public int OrderIndex { get; set; } = 1;
     }
 }

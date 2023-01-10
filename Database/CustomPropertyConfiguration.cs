@@ -9,6 +9,12 @@ namespace SimpleFormBuilder.Database
             Property(x => x.EntityName).IsRequired().IsUnicode(false).HasMaxLength(255);
             Property(x => x.PropertyName).IsRequired().IsUnicode(false).HasMaxLength(50);
             Property(x => x.Title).IsRequired().IsUnicode(true).HasMaxLength(100);
+            HasIndex(x =>
+                new
+                {
+                    x.EntityName,
+                    x.PropertyName
+                }).IsUnique();
 
             //ToDo موارد غیر فعال شده در ادامه باید پیاده سازی شوند
             Ignore(x => x.Category);
