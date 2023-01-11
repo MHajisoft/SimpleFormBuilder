@@ -1,10 +1,44 @@
-﻿@using SimpleFormBuilder.Models
+﻿@using SimpleFormBuilder.Entity
+@using SimpleFormBuilder.Models
 
 @model PersonListModel
 
 @if (Model.Persons.Any())
 {
-    
+    var count = 1;
+    <table class="table table-info table-striped table-hover">
+        <thead>
+        <tr>
+            <th scope="col" class="col-1">#</th>
+            <th scope="col" class="col-2">@nameof(Person.FirstName)</th>
+            <th scope="col" class="col-2">@nameof(Person.LastName)</th>
+            <th scope="col" class="col-1">@nameof(Person.Age)</th>
+            <th scope="col" class="col-1">@nameof(Person.BirthDate)</th>
+            <th scope="col" class="col-1">@nameof(Person.Picture)</th>
+            <th scope="col" class="col-2">@nameof(Person.Tags)</th>
+            <th scope="col" class="col-2">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Persons)
+        {
+            <tr>
+                <th scope="row">@count</th>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Age</td>
+                <td>@item.BirthDate</td>
+                <td>@item.Picture</td>
+                <td>@item.Tags</td>
+                <td>
+                    <a class="btn btn-success" href="@Url.Action("Detail", "Person", new { id = @item.Id })">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Person", new { id = @item.Id })">Delete</a>
+                </td>
+                @{ count++; }
+            </tr>
+        }
+        </tbody>
+    </table>
 }
 else
 {

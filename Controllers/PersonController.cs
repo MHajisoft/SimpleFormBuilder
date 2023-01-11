@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 using SimpleFormBuilder.Models;
 
@@ -24,6 +25,15 @@ namespace SimpleFormBuilder.Controllers
             };
 
             return View(model);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var entity = Context.Persons.Single(x => x.Id == id);
+            Context.Entry(entity).State = EntityState.Deleted;
+            Context.SaveChanges();
+
+            return Redirect(Url.Action("Index", "Person"));
         }
     }
 }
