@@ -1,6 +1,134 @@
-﻿@using SimpleFormBuilder.Models
+﻿@using System.Reflection
+@using SimpleFormBuilder.Entity
+@using SimpleFormBuilder.Models
 
 @model PersonDetailModel
 
+@using (Html.BeginForm("Update", "Person", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    //ToDo Make Dynamic
+    @Html.HiddenFor(x => x.Person.Id)
 
-<h2>title</h2>
+    foreach (var item in Model.CustomProperties)
+    {
+        var propertyInfo = Model.PersonProperties.Single(x => x.Name.Equals(item.PropertyName));
+
+        switch (propertyInfo.PropertyType)
+        {
+            case var str when str == typeof(string):
+                @RenderString(propertyInfo, item, Model.Person)
+                break;
+
+            case var num1 when num1 == typeof(int):
+                @RenderNumber(propertyInfo, item, Model.Person)
+                break;
+
+            case var time1 when time1 == typeof(DateTime):
+            case var time2 when time2 == typeof(DateTime?):
+                @RenderDate(propertyInfo, item, Model.Person)
+                break;
+
+            case var t when t == typeof(byte[]):
+                @RenderByte(propertyInfo, item, Model.Person)
+                break;
+
+            case var t when t == typeof(List<string>):
+                @RenderList(propertyInfo, item, Model.Person)
+                break;
+        }
+    }
+
+    <div class="row mb-5">
+        <a class="btn btn-danger col-1" href="@Url.Action("Index", "Person")">Back</a>
+        <button class="btn btn-success col-1" type="submit">Save</button>
+    </div>
+}
+
+@helper RenderString(PropertyInfo propertyInfo, CustomProperty customProperty, Person person)
+{
+    <div class="row mb-3">
+        <label class="col-2 col-form-label" for="@(customProperty.EntityName)_@customProperty.PropertyName">@customProperty.Title</label>
+        <div class="col-4">
+            @{
+                var value = propertyInfo.GetValue(person);
+            }
+            <input class="form-control" id="@(customProperty.EntityName)_@customProperty.PropertyName" name="@(customProperty.EntityName).@customProperty.PropertyName" type="text" value="@value">
+        </div>
+    </div>
+}
+
+@helper RenderNumber(PropertyInfo propertyInfo, CustomProperty customProperty, Person person)
+{
+    <div class="row mb-3">
+        <label class="col-2 col-form-label" for="@(customProperty.EntityName)_@customProperty.PropertyName">@customProperty.Title</label>
+        @{
+            var value = propertyInfo.GetValue(person);
+        }
+        <div class="col-4">
+            <input class="form-control" id="@(customProperty.EntityName)_@customProperty.PropertyName" name="@(customProperty.EntityName).@customProperty.PropertyName" type="number" value="@value">
+        </div>
+    </div>
+}
+
+@helper RenderDate(PropertyInfo propertyInfo, CustomProperty customProperty, Person person)
+{
+    <div class="row mb-3">
+        <label class="col-2 col-form-label" for="@(customProperty.EntityName)_@customProperty.PropertyName">@customProperty.Title</label>
+        @{
+            var value = (propertyInfo.GetValue(person) as DateTime?)?.ToString("yyyy-MM-dd");
+        }
+        <div class="col-4">
+            <input class="form-control" id="@(customProperty.EntityName)_@customProperty.PropertyName" name="@(customProperty.EntityName).@customProperty.PropertyName" type="date" value="@value">
+        </div>
+    </div>
+}
+
+@helper RenderByte(PropertyInfo propertyInfo, CustomProperty customProperty, Person person)
+{
+    <div class="row mb-3">
+        <label class="col-2 col-form-label" for="@(customProperty.EntityName)_@(customProperty.PropertyName)String">@customProperty.Title</label>
+        @{
+            var value = propertyInfo.GetValue(person);
+        }
+        <div class="col-4">
+            <input class="form-control" id="@(customProperty.EntityName)_@(customProperty.PropertyName)String" name="@(customProperty.EntityName).@(customProperty.PropertyName)String" type="file" value="@value">
+        </div>
+    </div>
+}
+
+@helper RenderList(PropertyInfo propertyInfo, CustomProperty customProperty, Person person)
+{
+    //ToDo Move to CustomProperty
+    var list = new List<string> { "Item-01", "Item-02", "Item-03", "Item-04", "Item-05" };
+
+    <div class="row mb-3">
+        <label class="col-2 col-form-label" for="@(customProperty.EntityName)_(@customProperty.PropertyName)">@customProperty.Title</label>
+        @{
+            var value = propertyInfo.GetValue(person);
+        }
+        <div class="col-4">
+            @Html.ListBox($"{customProperty.EntityName}.{customProperty.PropertyName}", list.Select(x => new SelectListItem { Text = x, Value = x }), new { @class = "form-control" })
+        </div>
+    </div>
+}
+
+<script>
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>

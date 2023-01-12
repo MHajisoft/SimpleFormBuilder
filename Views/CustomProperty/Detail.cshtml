@@ -29,13 +29,6 @@
     </div>
     
     <div class="row mb-3">
-        <div class="form-check">
-            @Html.LabelFor(x => x.CustomProperty.IsActive, new { @class = "form-check-label" })
-            @Html.CheckBoxFor(x => x.CustomProperty.IsActive, new { @class = "form-check-input" })
-        </div>
-    </div>
-    
-    <div class="row mb-3">
         @Html.LabelFor(x => x.CustomProperty.OrderIndex, new { @class = "col-2 col-form-label" })
         <div class="col-4">
             @Html.TextBoxFor(x => x.CustomProperty.OrderIndex, new { @class = "form-control", type = "number" })
@@ -45,6 +38,13 @@
         </div>
     </div>
 
+    <div class="row mb-3">
+        <div class="form-check">
+            @Html.LabelFor(x => x.CustomProperty.IsActive, new { @class = "form-check-label" })
+            @Html.CheckBoxFor(x => x.CustomProperty.IsActive, new { @class = "form-check-input" })
+        </div>
+    </div>
+    
     <div class="row mb-5">
         <a class="btn btn-danger col-1" href="@Url.Action("Index", "CustomProperty", new { entity = nameof(Person) })">Back</a>
         <button class="btn btn-success col-1" type="submit">Save</button>

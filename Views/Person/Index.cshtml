@@ -3,6 +3,8 @@
 
 @model PersonListModel
 
+<a class="btn btn-primary col-1 my-2" href="@Url.Action("Add", "Person")">Add</a>
+
 @if (Model.Persons.Any())
 {
     var count = 1;
@@ -12,7 +14,7 @@
             <th scope="col" class="col-1">#</th>
             <th scope="col" class="col-2">@nameof(Person.FirstName)</th>
             <th scope="col" class="col-2">@nameof(Person.LastName)</th>
-            <th scope="col" class="col-1">@nameof(Person.Age)</th>
+            <th scope="col" class="col-1">@nameof(Person.ChildCount)</th>
             <th scope="col" class="col-1">@nameof(Person.BirthDate)</th>
             <th scope="col" class="col-1">@nameof(Person.Picture)</th>
             <th scope="col" class="col-2">@nameof(Person.Tags)</th>
@@ -26,10 +28,15 @@
                 <th scope="row">@count</th>
                 <td>@item.FirstName</td>
                 <td>@item.LastName</td>
-                <td>@item.Age</td>
-                <td>@item.BirthDate</td>
-                <td>@item.Picture</td>
-                <td>@item.Tags</td>
+                <td>@item.ChildCount</td>
+                <td>@(item.BirthDate?.ToString("yyyy-MM-dd"))</td>
+                <td>
+                    @if (item.Picture != null)
+                    {
+                        <img src="data:Image;base64,@Convert.ToBase64String(item.Picture)" alt="" width="30px" height="100px"/>
+                    }
+                </td>
+                <td>@item.TagsList</td>
                 <td>
                     <a class="btn btn-success" href="@Url.Action("Detail", "Person", new { id = @item.Id })">Edit</a>
                     <a class="btn btn-danger" href="@Url.Action("Delete", "Person", new { id = @item.Id })">Delete</a>
