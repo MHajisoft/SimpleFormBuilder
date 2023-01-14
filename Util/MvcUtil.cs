@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.IO;
+using System.Web.Mvc;
 
 namespace SimpleFormBuilder.Util
 {
@@ -13,6 +14,15 @@ namespace SimpleFormBuilder.Util
             var returnActive = control == routeControl;
 
             return returnActive ? "active" : "";
+        }
+
+        public static byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, imageIn.RawFormat);
+                return ms.ToArray();
+            }
         }
     }
 }

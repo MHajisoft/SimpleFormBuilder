@@ -3,7 +3,7 @@ using SimpleFormBuilder.Database;
 
 namespace SimpleFormBuilder.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<AppDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<AppDbContext>
     {
         public Configuration()
         {

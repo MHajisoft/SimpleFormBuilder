@@ -8,7 +8,8 @@ namespace SimpleFormBuilder.Database
     {
         public AppDbContext() : base("SimpleFormConnection")
         {
-            System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
+            // System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<AppDbContext, Configuration>());
+            System.Data.Entity.Database.SetInitializer(new AppDatabaseInitializer());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
