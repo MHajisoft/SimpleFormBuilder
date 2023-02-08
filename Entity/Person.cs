@@ -31,8 +31,8 @@ namespace SimpleFormBuilder.Entity
         [ShowInDesigner]
         public List<string> Tags
         {
-            get => TagsList?.Split(',').ToList();
-            set => TagsList = value != null ? string.Join(",", value) : null;
+            get { return TagsList?.Split(',').ToList(); }
+            set { TagsList = value != null ? string.Join(",", value) : null; }
         }
     }
 }
